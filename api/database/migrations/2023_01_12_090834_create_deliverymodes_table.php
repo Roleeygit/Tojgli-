@@ -21,8 +21,8 @@ return new class extends Migration
 
         DB::table("delivery_modes")->insert
         ([
-            ["delivery_mode" => "Házhozszállítás"],
-            ["delivery_mode" => "Postai átvétel"]
+            ["delivery_mode" => "Home delivery"],
+            ["delivery_mode" => "Postal receipt"]
         ]);
     }
 

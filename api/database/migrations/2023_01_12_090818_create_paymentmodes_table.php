@@ -21,8 +21,8 @@ return new class extends Migration
 
         DB::table("payment_modes")->insert
         ([
-            ["payment_mode" => "Kártya"],
-            ["payment_mode" => "Készpénz"]
+            ["payment_mode" => "By card"],
+            ["payment_mode" => "With cash"]
         ]);
 
     }

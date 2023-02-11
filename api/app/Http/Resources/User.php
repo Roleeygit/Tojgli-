@@ -21,7 +21,7 @@ class User extends JsonResource
             "email" => $this->email,
             "password" => $this->password,
             "is_admin" => $this->is_admin,
-            "remember_token" => $this->remember_token ?? "Nincs még adat megadva!",
+            "remember_token" => $this->remember_token ?? "Data not provided yet!",
             "created_at" => $this->created_at,
             "updated_at" => $this->updated_at
         ];

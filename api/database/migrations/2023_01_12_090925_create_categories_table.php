@@ -20,13 +20,13 @@ return new class extends Migration
 
         DB::table("categories")->insert
         ([
-            ["category" => "Csirke Tojás"],
-            ["category" => "Strucc Tojás"],
-            ["category" => "Kitalált Tojás"],
-            ["category" => "Lúd Tojás"],
-            ["category" => "Valamilyen Tojás"]
+            ["category" => "Chicken Egg"],
+            ["category" => "Ostrich Egg"],
+            ["category" => "Random Egg"],
+            ["category" => "Goose Egg"],
+            ["category" => "Test Egg"]
         ]);
-    }
+    } 
 
     /**
      * Reverse the migrations.

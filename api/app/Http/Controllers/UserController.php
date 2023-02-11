@@ -28,26 +28,26 @@ class UserController extends BaseController
             "confirm_password" => "required|same:password",
         ],
         [
-            "username.required" => "A felhasználónév megadása kötelező!",
-            "username.unique" => "Ez a felhasználónév már foglalt!",
-            "username.min" => "A felhasználónévnek minimum 5 karakter hosszúnak kell lennie!",
+            "username.required" => "Filling the username field is required!",
+            "username.unique" => "This username is already in use!",
+            "username.min" => "The username should be more than 5 characters!",
 
-            "email.required" => "Az email mező kitöltése kötelező!",
-            "email.email" => "Az email formátuma nem megfelelő! (@) ",
-            "email.unique" => "Ez az email cim már használatban van!",
+            "email.required" => "Filling the email field is required!",
+            "email.email" => "The email format is not acceptable! (@) ",
+            "email.unique" => "Email address is already registered!",
 
-            "password.required" => "A jelszó megadása kötelező!",
-            "password.min" => "A jelszónak minimum 6 karakter hosszúnak kell lennie!",
-            "password.regex" => "A jelszónak minimum tartalmaznia kell egy számot, egy nagybetűt és egy kisbetűt!",
+            "password.required" => "Filling the password field is required!",
+            "password.min" => "The password should be at least 6 character long!",
+            "password.regex" => "The password should contain at least one upper and one lower case letter!",
 
-            "confirm_password.required" => "A jelszó újboli megagása kötelező!",
-            "confirm_password.same" => "A jelszavaknak eggyezniük kell!",
+            "confirm_password.required" => "Filling the password again is required!",
+            "confirm_password.same" => "The field must be equal with the password!",
         ]
     );
 
         if($validator->fails())
         {
-            return $this->sendError("Hibás regisztrációs adatok", $validator->errors());
+            return $this->sendError("Wrong registration data.", $validator->errors());
         }
 
         $input["password"] = bcrypt($input["password"]);
@@ -57,7 +57,7 @@ class UserController extends BaseController
         $profile->user_id = $user->id;
         $profile->save();
 
-        return $this->sendResponse($user, "Regisztráció sikeres.");
+        return $this->sendResponse($user, "The register was successfull.");
     }
 
     public function UserLogin(Request $request)
@@ -68,11 +68,11 @@ class UserController extends BaseController
             $success["token"] = $authUser->createToken("MyAuthApp")->plainTextToken;
             $success["username"] = $authUser->username;
 
-            return $this->sendResponse($success, "Bejelentkezés sikeres!");
+            return $this->sendResponse($success, "The login was successfull!");
         }
         else
         {
-            return $this->sendError("Unauthorized." . json_encode(["error"=>"Sikertelen bejelentkezés"]));
+            return $this->sendError("Unauthorized." . json_encode(["error"=>"Login failed."]));
 
 
         }
@@ -82,14 +82,14 @@ class UserController extends BaseController
     {
         auth("sanctum")->user()->currentAccessToken()->delete();
 
-        return response()->json("Sikerek kijelentkezés");
+        return response()->json("logout was successfull.");
     }
 
     public function ListUsers()
     {
         $users = User::all();
 
-        return $this->sendResponse(UserResource::collection($users), "Regisztrált felhasználók listája kiirva!");
+        return $this->sendResponse(UserResource::collection($users), "The registered user's list printed!");
     }
 
     public function UpdateUser(Request $request, $id)
@@ -103,17 +103,17 @@ class UserController extends BaseController
             "password" => "required|min:6|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/",
         ],
         [
-            "username.required" => "A felhasználónév megadása kötelező!",
-            "username.unique" => "Ez a felhasználónév már foglalt!",
-            "username.min" => "A felhasználónévnek minimum 5 karakter hosszúnak kell lennie!",
+            "username.required" => "Filling the username field is required!",
+            "username.unique" => "This username is already in use!",
+            "username.min" => "The username should be more than 5 characters!",
 
-            "email.required" => "Az email mező kitöltése kötelező!",
-            "email.email" => "Az email formátuma nem megfelelő! (@) ",
-            "email.unique" => "Ez az email cim már használatban van!",
+            "email.required" => "Filling the email field is required!",
+            "email.email" => "The email format is not acceptable! (@) ",
+            "email.unique" => "Email address is already registered!",
 
-            "password.required" => "A jelszó megadása kötelező!",
-            "password.min" => "A jelszónak minimum 6 karakter hosszúnak kell lennie!",
-            "password.regex" => "A jelszónak minimum tartalmaznia kell egy számot, egy nagybetűt és egy kisbetűt!",
+            "password.required" => "Filling the password field is required!",
+            "password.min" => "The password should be at least 6 character long!",
+            "password.regex" => "The password should contain at least one upper and one lower case letter!",
         ]
     );
 
@@ -128,7 +128,7 @@ class UserController extends BaseController
         $user->save();
 
 
-        return $this->sendResponse(new UserResource($user), "Felhasználó adatai frissítve!");
+        return $this->sendResponse(new UserResource($user), "The user data updated!");
     }
 
     public function UpdateAdmin(Request $request, $id)
@@ -150,7 +150,7 @@ class UserController extends BaseController
     $user->update($request->all());
     $user->save();
 
-    return $this->sendResponse(new UserResource($user), "Frissítés sikeres!");
+    return $this->sendResponse(new UserResource($user), "Admin access granted!");
     }
 
     public function ShowUserById ($id)
@@ -159,10 +159,10 @@ class UserController extends BaseController
 
         if(is_null($user))
         {
-            return $this->sendError("A felhasználó nem létezik!");
+            return $this->sendError("There is no user with this id: $id!");
         }
 
-        return $this->sendResponse(new UserResource($user), "$id. Felhasználó adatainak betöltése sikeres.");
+        return $this->sendResponse(new UserResource($user), "$id. User data load is success");
         
     }
 
@@ -178,7 +178,7 @@ class UserController extends BaseController
             $user->save();
         }
 
-        return $this->sendResponse([], "Felhasználó törlése sikeresen megtörtént.");
+        return $this->sendResponse([], "The user has been successfully deleted!");
     }
 
 }

@@ -17,14 +17,14 @@ class Profile extends JsonResource
         return
     [
         "id" => $this->id,
-        "surname" => $this->surname ?? "Nincs még adat megadva!",
-        "lastname" => $this->lastname ?? "Nincs még adat megadva!",
-        "country" => $this->country ?? "Nincs még adat megadva!",
-        "city" => $this->city ?? "Nincs még adat megadva!",
-        "address" => $this->address ?? "Nincs még adat megadva!",
-        "order_date" => $this->order_date ?? "Nincs még adat megadva!",
-        "payment_mode" => $this->payment_mode->payment_mode ?? "Nincs még adat megadva!",
-        "delivery_mode" => $this->delivery_mode->delivery_mode ?? "Nincs még adat megadva!"
+        "surname" => $this->surname ?? "Data not provided yet!",
+        "lastname" => $this->lastname ?? "Data not provided yet!",
+        "country" => $this->country ?? "Data not provided yet!",
+        "city" => $this->city ?? "Data not provided yet!",
+        "address" => $this->address ?? "Data not provided yet!",
+        "order_date" => $this->order_date ?? "Data not provided yet!",
+        "payment_mode" => $this->payment_mode->payment_mode ?? "Data not provided yet!",
+        "delivery_mode" => $this->delivery_mode->delivery_mode ?? "Data not provided yet!"
     ];
     }
 }

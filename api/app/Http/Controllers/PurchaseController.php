@@ -18,7 +18,7 @@ class PurchaseController extends BaseController
 
         if (!$profile) 
         {
-            return $this->sendError("A $id. profil nem található.");
+            return $this->sendError("Profile was not found with id: $id "); 
         }
 
         $validator = Validator::make($request->all(), 
@@ -27,27 +27,27 @@ class PurchaseController extends BaseController
             "delivery_mode" => "required"
         ], 
         [
-            "payment_mode.required" => "Fizetési mód megadása kötelező!",
-            "delivery_mode.required" => "Házhoz szállitási módot kötelező megadni!"
+            "payment_mode.required" => "Filling the payment_mode field is required!",
+            "delivery_mode.required" => "Filling the delivery_mode field is required!"
         ]);
 
         if ($validator->fails()) 
         {
-            return $this->sendError("Hiba az adatok megadásában.", $validator->errors());
+            return $this->sendError("There was an error with the provided data.", $validator->errors());
         }
 
         $payment_mode = Payment_Mode::where("payment_mode", $request->payment_mode)->first();
 
         if (!$payment_mode) 
         {
-            return $this->sendError("Érvénytelen fizetési mód van kiválasztva!");
+            return $this->sendError("Invalid payment mode has been choosen!");
         }
 
         $delivery_mode = Delivery_Mode::where("delivery_mode", $request->delivery_mode)->first();
 
         if (!$delivery_mode) 
         {
-            return $this->sendError("Érvénytelen kézbesítési mód van kiválasztva!");
+            return $this->sendError("Invalid delivery mode has been choosen!");
         }
 
         $profile->payment_mode_id = $payment_mode->id;
@@ -55,6 +55,6 @@ class PurchaseController extends BaseController
         $profile->order_date = Carbon::now();
         $profile->update();
 
-        return $this->sendResponse(new ProfileResource($profile), "A vásárlás sikeres!");
+        return $this->sendResponse(new ProfileResource($profile), "The purchase was successfull!");
     }
 }

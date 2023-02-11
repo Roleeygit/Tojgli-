@@ -20,7 +20,7 @@ class ProfileController extends BaseController
     {
 
         $profiles = Profile::with(["user", "payment_mode", "delivery_mode"])->get();
-        return $this->sendResponse(ProfileResource::collection($profiles), "Profil Adatok kiirva!");
+        return $this->sendResponse(ProfileResource::collection($profiles), "Got every profile data!");
 
     }   
 
@@ -37,11 +37,11 @@ class ProfileController extends BaseController
             "address" => "required",
         ],
         [
-            "surname.required" => "Családnév megadása kötelező!",
-            "lastname.required" => "Keresztnév megadása kötelező!",
-            "country.required" => "Ország megadása kötelező!",
-            "city.required" => "Város megadása kötelező!",
-            "address.required" => "Utca megadása kötelező!",
+            "surname.required" => "Filling the surname field is required!",
+            "lastname.required" => "Filling the lastname field is required!",
+            "country.required" => "Filling the country field is required!",
+            "city.required" => "Filling the city field is required!",
+            "address.required" => "Filling the address field is required!",
         ]
     );
 
@@ -55,23 +55,23 @@ class ProfileController extends BaseController
         if ($profile) 
         {
             $profile->update($request->all());
-            return $this->sendResponse(new ProfileResource($profile), "Profil Adatok frissítve!");
+            return $this->sendResponse(new ProfileResource($profile), "Profile updated id:($id)!");
         } 
         else 
         {
-            return $this->sendError("A profil nem található ezzel az idvel: ".$id);
+            return $this->sendError("The profile was not found with this id: $id ");
         }
 
         $profile->save();
 
-        return $this->sendResponse(new ProfileResource($profile), "Profil sikeresen frissitve!");
+        return $this->sendResponse(new ProfileResource($profile), "The profile was successfully updated!");
     }
 
     public function DeleteProfile($id)
     {
         Profile::destroy($id);
 
-        return $this->sendResponse([], "Profil törlése sikeresen megtörtént.");
+        return $this->sendResponse([], "The profile was successfully deleted.");
     }
     
 }
