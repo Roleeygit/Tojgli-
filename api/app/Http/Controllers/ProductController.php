@@ -15,7 +15,7 @@ class ProductController extends BaseController
     {
         $products = Product::with("category")->get();
 
-        return $this->sendResponse(ProductResource::collection($products), "Termékek kiirva!");
+        return $this->sendResponse(ProductResource::collection($products), "Got Products list!");
     }
 
     public function NewProduct(Request $request)
@@ -35,11 +35,11 @@ class ProductController extends BaseController
             "category" => "required"
         ],
         [
-            "name.required" => "A termék nevének megadása kötelező!",
-            "price.required" => "A termék árának megadása kötelező!",
-            "weight.required" => "A termék súlyának megadása kötelező!",
-            "description.required" => "A termék leirásának megadása kötelező!",
-            "category.required" => "A termék kategóriájának megadása kötelező!"
+            "name.required" => "The product's name field is required!",
+            "price.required" => "The price's name field is required!",
+            "weight.required" => "The weight's name field is required!",
+            "description.required" => "The product's description field is required!",
+            "category.required" => "The product's category field is required!"
         ]);
  
         if ($validator->fails())
@@ -49,7 +49,7 @@ class ProductController extends BaseController
 
         $product = Product::create($input);
 
-        return $this->sendResponse(new ProductResource($product), "Termék létrehozva!");
+        return $this->sendResponse(new ProductResource($product), "Product created!");
 
     }
 
@@ -62,7 +62,7 @@ class ProductController extends BaseController
             "image" => "required"
         ],
         [
-            "image.required" => "A kép megadása kötelező!"
+            "image.required" => "It's mandatory to add an image!"
         ]);
 
         if ($validator->fails())
@@ -75,7 +75,7 @@ class ProductController extends BaseController
         $product->save();
 
 
-        return $this->sendResponse(new productResource($product), "A kép frissítve!");
+        return $this->sendResponse(new productResource($product), "The picture added to the product!");
 
     }
 
@@ -85,10 +85,10 @@ class ProductController extends BaseController
 
         if(is_null($product))
         {
-            return $this->sendError("A termék nem létezik!");
+            return $this->sendError("There is no product with this id($id)!");
         }
 
-        return $this->sendResponse(new ProductResource($product), "Termék betöltve.");
+        return $this->sendResponse(new ProductResource($product), "Product loading was successfull.");
         
     }
 
@@ -98,7 +98,7 @@ class ProductController extends BaseController
 
         if(is_null($input))
         {
-            return $this->sendError("A termék nem létezik!");
+            return $this->sendError("There is no product with this id($id)!");
         }
         
         $validator = Validator::make($input,
@@ -109,10 +109,10 @@ class ProductController extends BaseController
             "description" => "required",
         ],
         [
-            "name.required" => "A termék nevének megadása kötelező!",
-            "price.required" => "A termék árának megadása kötelező!",
-            "weight.required" => "A termék súlyának megadása kötelező!",
-            "description.required" => "A termék leirásának megadása kötelező!",
+            "name.required" => "The product's name field is required!",
+            "price.required" => "The price's name field is required!",
+            "weight.required" => "The weight's name field is required!",
+            "description.required" => "The product's description field is required!"
         ]);
 
         if ($validator->fails())
@@ -124,7 +124,7 @@ class ProductController extends BaseController
         $product->update($request->all());
         $product->save();
 
-        return $this->sendResponse(new productResource($product), "A termék frissítve!"); 
+        return $this->sendResponse(new productResource($product), "The product has been updated!"); 
     }
 
     public function DeleteProduct($id)
@@ -138,7 +138,7 @@ class ProductController extends BaseController
             $product->id = $product->id -1;
             $product->save();
         }
-        return $this->sendResponse([], "Termék törölve!");
+        return $this->sendResponse([], "Product has been deleted successfully!");
     }
 
 }
