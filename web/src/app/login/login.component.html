@@ -1,0 +1,43 @@
+<a routerLink=""><img id="logo" class="mb-4 text-center" src="/assets/logo.png" alt="" width="300" height="300"></a>
+<main class="form-signin w-100 m-auto text-center">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+      <h1 class="h3 mb-4 fw-normal"><b>Login Form</b></h1>
+
+      <div class="form-floating">
+        <input type="email" class="form-control" id="email" name="email" formControlName="email" placeholder="nev@pelda.com">
+        <label for="email">Email address</label>
+      </div>
+
+      <div class="form-floating">
+        <input type="username" class="form-control" id="username" name="username" formControlName="username" placeholder="Nagy Lajos">
+        <label for="username">Username</label>
+        
+        
+      </div>
+
+      <div class="form-floating">
+        <input type="password" class="form-control" id="password" name="password" formControlName="password" placeholder="Jelszó">
+        <label for="password">Password</label>
+        
+      </div>
+
+      <div class="checkbox mb-4">
+        <label id="remember">
+          <input type="checkbox" value="remember-me"> Remember password!
+        </label>
+      </div>
+
+      <div class="checkbox mb-4">
+        <label id="account">
+          Dont have an account yet? <a routerLink="/register" class="register">Click here!</a>
+        </label>
+      </div>
+
+      <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
+      <a id="copyright" href="http://github.com/Roleeygit/Tojgli-" target="_blank">
+          <p class="mt-5 mb-3 text-muted">EggShop++ &copy; 2023 </p>
+      </a>
+      
+    </form>
+  </main>

@@ -38,7 +38,7 @@ class UserController extends BaseController
 
             "password.required" => "Filling the password field is required!",
             "password.min" => "The password should be at least 6 character long!",
-            "password.regex" => "The password should contain at least one upper and one lower case letter!",
+            "password.regex" => "The password should contain at least one upper one lower case letter and number(s)!",
 
             "confirm_password.required" => "Filling the password again is required!",
             "confirm_password.same" => "The field must be equal with the password!",
@@ -113,7 +113,7 @@ class UserController extends BaseController
 
             "password.required" => "Filling the password field is required!",
             "password.min" => "The password should be at least 6 character long!",
-            "password.regex" => "The password should contain at least one upper and one lower case letter!",
+            "password.regex" => "The password should contain at least one upper one lower case letter and number(s)!",
         ]
     );
 
